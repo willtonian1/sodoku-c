@@ -1,0 +1,17 @@
+# Ignore executables
+*.exe
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore build and compiler files
+*.o
+*.obj
+*.out
+*.log
+
+# Ignore compiled C files
+*.gch
+*.dSYM/
+
+
