@@ -3,6 +3,7 @@
 
 void gridInit(int grid[9][9]){
 
+  //Giving Each Space in Grid the value 0
   for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             grid[i][j] = 0;  // Empty cells
@@ -13,12 +14,8 @@ void gridInit(int grid[9][9]){
 //Display Grid Function
 void displayGrid(int grid[9][9]) {
 
+  //Colours
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-  
-  int i;
-  int y;
-
 
   //Top Row
   SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
@@ -26,6 +23,9 @@ void displayGrid(int grid[9][9]) {
   printf("___|______|______|_____\n");
 
   //Nested Loop for 2D Grid
+  int i;
+  int y;
+  //Row Loop
   for (i=0; i<9; i++) {
 
     
@@ -34,11 +34,8 @@ void displayGrid(int grid[9][9]) {
     printf("%d", (i+1));
     printf("  |");
   
-
+    //Column Loop
     for (y=0; y<9; y++) {
-
-      
-      
 
       //Vertical line after 3 columns
       if ((y % 3 == 0) && y != 0){
@@ -49,7 +46,6 @@ void displayGrid(int grid[9][9]) {
       //Game colour to white
       SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 
-
       //Converting integers to characters, so I can display 0's as "-"
       if (grid[i][y] == 0) {
         char symbol = '-';
@@ -58,7 +54,6 @@ void displayGrid(int grid[9][9]) {
       
       else {
         printf("%d ", grid[i][y]);
-
       }
 
       if (y==8){
@@ -74,8 +69,6 @@ void displayGrid(int grid[9][9]) {
     if (((i + 1) % 3 == 0) && i != 0 && i != 8){
       printf("___|______|______|_____\n");
       
-    
-
     }
   }
 }
@@ -112,6 +105,7 @@ int checkDuplicates(int nums[9]){
 
 //Function to check whether move is possible
 int validateMove(int row, int col, int grid[9][9]) {
+  
   //Overview:
   //Going to take the row, and column, and box and make into array of 9
   //If duplicate is found, then we will return false.
@@ -194,8 +188,6 @@ int validateMove(int row, int col, int grid[9][9]) {
 //Final full puzzle check
 int solved(int grid[9][9]) {
 
-//True return 1 
-//False return 0
   int i;
   int j;
 
@@ -224,19 +216,19 @@ void loadBoard(int board[9][9]) {
 
   }
 
-    int num;
-    // Read numbers from the file and print them
-    int x = 0;
-    int y = 0;
-    while (fscanf(file, "%d", &num) != EOF) {
-      board[y][x] = num;
-      x += 1;
+  int num;
+  // Read numbers from the file and insert them into board structure
+  int x = 0;
+  int y = 0;
+  while (fscanf(file, "%d", &num) != EOF) {
+    board[y][x] = num;
+    x += 1;
 
-      if (x == 9) { 
-        x = 0;
-        y += 1;
-      }        
-    }
+    if (x == 9) { 
+      x = 0;
+      y += 1;
+    }        
+  }
 
   // Close the file
   fclose(file);
@@ -273,8 +265,9 @@ int main() {
     if (solved(board)) {
       game = 0;
     }
+
     printf("\n");  
   }
-
+  //Game End
   printf("Puzzle Complete");
 }
