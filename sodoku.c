@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <windows.h>
 
 void gridInit(int grid[9][9]){
 
@@ -12,14 +12,44 @@ void gridInit(int grid[9][9]){
 
 //Display Grid Function
 void displayGrid(int grid[9][9]) {
+
+  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
   
   int i;
   int y;
 
+
+  //Top Row
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+  printf("   |1 2 3 |4 5 6 |7 8 9\n");
+  printf("___|______|______|_____\n");
+
   //Nested Loop for 2D Grid
   for (i=0; i<9; i++) {
+
+    
+    //Row Numbers
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+    printf("%d", (i+1));
+    printf("  |");
+  
+
     for (y=0; y<9; y++) {
+
       
+      
+
+      //Vertical line after 3 columns
+      if ((y % 3 == 0) && y != 0){
+        SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+        printf("|");
+      }
+
+      //Game colour to white
+      SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+
+
       //Converting integers to characters, so I can display 0's as "-"
       if (grid[i][y] == 0) {
         char symbol = '-';
@@ -34,11 +64,20 @@ void displayGrid(int grid[9][9]) {
       if (y==8){
         printf("\n");
       }
+
+
+     
+    }
+
+     //Line under 3 rows
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+    if (((i + 1) % 3 == 0) && i != 0 && i != 8){
+      printf("___|______|______|_____\n");
       
+    
 
     }
   }
-
 }
 
 //Duplicates check function
